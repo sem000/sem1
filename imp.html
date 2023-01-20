@@ -1,0 +1,439 @@
+pract 1  Design a simple linear neural network model
+n=int(input("Enter the number of input"))
+yin=0
+for i in range(n):
+
+  x=float(input("Enter the input x ="))
+
+  w=float(input("Enter weigth w = "))
+
+  yin = yin + x*w
+print("yin=",yin)
+if(yin<0):
+
+  output=0
+
+elif(yin>1):
+
+  output=1
+
+else:
+
+  output=yin
+
+print("Output:",output)
+
+1b Calculate the output of neural net using both binary and bipolar sigmoidal function
+import math
+n=int(input("Enter number of elements : "))
+x=float(input("enter the input x ="))
+w=float(input("enter the weight w ="))
+b=float(input("enter the bias b ="))
+yin=(b+x*w)
+print("the value of yin is",yin)
+if(yin<0):
+    output=0
+elif(yin>1):
+        output=1
+else:
+        output=yin
+        print("Output",output)
+yin=0
+for i in range(0,n):
+  x=float(input("X = "))
+  w=float(input("W = "))
+  yin = yin + x*w
+
+  b=float(input("B = "))
+  yin=yin + b
+print("yin=",yin)
+binary_sigmoidal = (1 / (1 +(math.e**(-yin))))
+print("Binary Sigmoidal = " ,round(binary_sigmoidal,3))
+bipolar_sigmoidal = (2 / (1 +(math.e**(-yin))))
+print("Bipolar Sigmoidal = " ,round(bipolar_sigmoidal,3))
+
+ Implement ANDNOT function using McCulloch-Pits neuron (use binary data representation)
+import numpy as np
+print('AND/NOT function using McCulloch - Pitts Neuron Network')
+x1_inputs = [1,1,0,0]
+x2_inputs = [1,0,1,0]
+print('Considering all weights as excitatory :')
+w1 = [1,1,1,1]
+w2 = [1,1,1,1]
+yin = []
+print("x1", "x2", "yin")
+for i in range(0,4):
+  yin.append(x1_inputs[i]*w1[i] + x2_inputs[i] * w2[i])
+  print(x1_inputs[i], " ", x2_inputs[i], " ", yin[i])
+print('Considering all weights as excitatory :')
+w1 = [1,1,1,1]
+w2 = [-1,-1,-1,-1]
+yin = []
+print("x1 ", "x2 ", "yin")
+for i in range(0,4):
+  yin.append(x1_inputs[i]*w1[i] + x2_inputs[i] * w2[i])
+  print(x1_inputs[i], " ", x2_inputs[i], " ", yin[i])
+theta = 2*1 - 1
+print('Threshold Theta : ',theta)
+print('Applying threshold : ',theta)
+y = []
+for i in range(0,4):
+  if(yin[i] >= theta):
+    value = 1
+    y.append(value)
+  else:
+    value = 0
+    y.append(value)
+print("x1 ", "x2 ", "y")
+
+
+for i in range(0,4):
+  print(x1_inputs[i], " ", x2_inputs[i], " ", y[i])
+
+Generate XOR function using McCulloch-Pitts neural net.
+print("XOR function using McCulloch-Pitts Neuron Network..")
+x1_inputs = [1,1,0,0]
+x2_inputs = [1,0,1,0]
+
+print("Calculating z1 = x1w11 + x2w21..")
+print("Considering one weight as excitatory and the other weight as inhibitory..")
+w11 = [1,1,1,1]
+w21 = [-1,-1,-1,-1]
+print("x1 ","x2 ","z1 ")
+
+z1 = []
+for i in range(0,4):
+  z1.append(x1_inputs[i] * w11[i] + x2_inputs[i] * w21[i])
+  print(x1_inputs[i], " ", x2_inputs[i], " ", z1[i])
+
+print("Calculating z2 = x1w12 + x2w22..")
+print("Considering one weight as excitatory and the other weight as inhibitory..")
+w22 = [1,1,1,1]
+w12 = [-1,-1,-1,-1]
+print("x1 ","x2 ","z2 ")
+
+z2 = []
+for i in range(0,4):
+  z2.append(x1_inputs[i] * w12[i] + x2_inputs[i] * w22[i])
+  print(x1_inputs[i], " ", x2_inputs[i], " ", z2[i])
+
+print("Applying threshold =  1 for z1 and z2")
+for i in range(0,4):
+  if(z1[i] >= 1):
+    z1[i] = 1
+  else:
+    z1[i] = 0
+  if(z2[i] >= 1):
+    z2[i] = 1
+  else:
+    z2[i] = 0
+print("z1 ", "z2 ")
+for i in range(0,4):
+  print(z1[i], " ", z2[i])
+
+print("x1 ","x2 ","y ")
+yin=[]
+v1=1
+v2=1
+for i in range(0,4):
+  yin.append(z1[i] * v1 + z2[i] * v2)
+  print(x1_inputs[i], " ",x2_inputs[i], " ",yin[i])
+
+print("Applying threshold = 1 for yin")
+y = []
+for i in range(0,4):
+  if(yin[i] >= 1):
+    y.append(1)
+  else:
+    y.append(0)
+for i in range(0,4):
+  print(x1_inputs[i], " ",x2_inputs[i], " ",y[i])
+
+ Write a program to implement Hebb’s rule.
+import numpy as np
+
+
+x1=np.array([1,-1,-1,1,-1,-1,1,1,1])
+x2=np.array([1,-1,1,1,-1,1,1,1,1])
+b=0
+
+
+y=np.array([1,-1])
+
+
+wtold=np.zeros((9,))
+wtnew=np.zeros((9,))
+wtnew=wtnew.astype(int)
+wtold=wtold.astype(int)
+
+
+bias=0
+
+
+print("First input with target=1")
+
+
+for i in range(0,9):
+  wtnew[i]=wtold[i]+x1[i]*y[0]
+wtold=wtnew
+b=b+y[0]
+print("new wt=", wtnew)
+print("Bias value",b)
+
+print("Second input with target=-1")
+
+
+for i in range(0,9):
+  wtnew[i]=wtold[i]+x2[i]*y[1]
+b=b+y[1]
+
+
+print("New wt=",wtnew)
+print("Bias value",b)
+
+Write a program to implement delta rule
+
+import numpy as np
+import time
+
+np.set_printoptions(precision=2)
+x=np.zeros((3,))
+weights=np.zeros((3,))
+desired=np.zeros((3,))
+actual=np.zeros((3,))
+
+
+for i in range(0,3):
+  x[i]=float(input("Intial inputs: "))
+for i in range(0,3):
+  weights[i]=float(input("Intial weights: ")) 
+for i in range(0,3):
+  desired[i]=float(input("Desired output: ")) 
+
+
+a=float(input("Enter learning rate: "))
+actual=x*weights
+print("Actual ",actual)
+print("Desired ",desired)
+
+
+while True:
+  if np.array_equal(desired,actual):
+    break
+  else:
+    for i in range(0,3):
+      weights[i]=weights[i]+a*(desired[i]-actual[i])
+  actual=x*weights
+
+
+print("Weights ",weights)
+print("Actual  ",actual)
+print("Desired ",desired)
+print("*"*30)
+print("Final output")
+print("Corrected weights", weights)
+print("Actual           ", actual)
+print("Desired          ", desired)
+
+ Write a program for Back Propagation Algorithm. 
+
+import numpy as np
+X=np.array(([2,9],[1,5],[3,6]),dtype=float)
+Y=np.array(([92],[86],[89]),dtype=float)
+#scale units
+X=X/np.amax(X,axis=0)
+Y=Y/100;
+class NN(object):
+    def __init__(self):
+        self.inputsize=2
+        self.outputsize=1
+        self.hiddensize=3
+        self.W1=np.random.randn(self.inputsize,self.hiddensize)	
+   
+
+     self.W2=np.random.randn(self.hiddensize,self.outputsize)
+    def forward(self,X):
+        self.z=np.dot(X,self.W1)
+        self.z2=self.sigmoidal(self.z)
+        self.z3=np.dot(self.z2,self.W2)
+        op=self.sigmoidal(self.z3)
+        return op;
+    def sigmoidal(self,s):
+        return 1/(1+np.exp(-s))
+obj=NN()
+op=obj.forward(X)
+print("actual ouput\n"+str(op))
+print("expected output\n"+str(Y))
+
+Write a program for error Backpropagation algorithm.
+
+import numpy as np
+X=np.array(([2,9],[1,5],[3,6]),dtype=float)
+Y=np.array(([92],[86],[89]),dtype=float)
+#scale units
+X=X/np.amax(X,axis=0)
+Y=Y/100;
+class NN(object):
+    def __init__(self):
+        self.inputsize=2
+        self.outputsize=1
+        self.hiddensize=3
+        self.W1=np.random.randn(self.inputsize,self.hiddensize)
+        self.W2=np.random.randn(self.hiddensize,self.outputsize)
+    def forward(self,X):
+        self.z=np.dot(X,self.W1)
+        self.z2=self.sigmoidal(self.z)
+        self.z3=np.dot(self.z2,self.W2)
+        op=self.sigmoidal(self.z3)
+        return op;
+    def sigmoidal(self,s):
+        return 1/(1+np.exp(-s))
+    def sigmoidalprime(self,s):
+        return s*(1-s)
+    def backward(self,X,Y,o):
+        self.o_error=Y-o
+        self.o_delta=self.o_error*self.sigmoidalprime(o)
+        self.z2_error=self.o_delta.dot(self.W2.T)
+        self.z2_delta=self.z2_error*self.sigmoidalprime(self.z2)
+        self.W1=self.W1+X.T.dot(self.z2_delta)
+        self.W2=self.W2+self.z2.T.dot(self.o_delta)
+    def train(self,X,Y):
+        o=self.forward(X)
+        self.backward(X,Y,o)
+obj=NN()
+for i in range(2000):
+    print("input"+str(X))
+    print("Actual output"+str(Y))
+    print("Predicted output"+str(obj.forward(X)))
+    print("loss"+str(np.mean(np.square(Y-obj.forward(X)))))
+    obj.train(X,Y)
+
+Write a program for Kohonen Self Organizing Feature Map
+!pip install minisom
+from minisom import MiniSom
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+%load_ext autoreload
+colors = [[0.,0.,0.],
+          [0.,0.,1.],
+          [0.,0.,0.5],
+          [0.125,0.529,1.0],
+          [0.33,0.4,0.67],
+          [0.6,0.5,1.0],
+          [0.,1.,0.],
+          [1.,0.,0.],
+          [0.,1.,1.],
+          [1.,0.,1.],
+          [1.,1.,0.],
+          [1.,1.,1.],
+          [.33,.33,.33],
+          [.5,.5,.5],
+          [.66,.66,.66]]          
+color_names= \
+['black','blue','darkblue','skyblue',
+'greyblue','lilac','green','red',
+'cyan','violet','yellow','white',
+'darkgrey','mediumgrey','lightgrey']        
+          
+   
+som = MiniSom(30,30,3, sigma=3.,
+              learning_rate=2.5,
+              neighborhood_function='gaussian')
+
+
+plt.imshow(abs(som.get_weights()), interpolation='none')
+
+ FUZZY LOGIC
+list1=[]
+print("Enter 5 number")
+for i in range(5):
+    v= int(input())
+list1.append(v)
+list2=[]
+print("Enter 5 number")
+for i in range(5):
+  v= int(input())
+  list2.append(v)
+flag = 0
+for i in list1:
+  if i in list2:
+    flag=1
+if flag==1:
+  print("This list overlaps")
+else:
+  print("List does not overlaps")
+mm , list1=[]
+c=int(input("Enter the number of elements that ..."))
+for i in range(c):
+  ele = int(input("Enter the element "))
+  list1.append(ele)
+a=int(input("Enter the number"))
+if a not in list1:
+  print("The list does not contains",a)
+else:
+  print("The list contains",a)
+  details=[]     
+name=input("Enter the name")
+details.append(name)
+age=float(input("Enter your age: "))
+details.append(age)
+roll_no=int(input("Enter roll no: "))
+details.append(roll_no)
+for i in details:
+  print(i) 
+  print("Float",type(i) is float)
+  print("String",type(i) is str)
+for i in details:
+  print(i) 
+  print("Float: ",type(i) is not float)
+  print("String: ",type(i) is not str)
+
+Find the ratios using fuzzy logic
+!pip install fuzzywuzzy
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+s1 = "I love fuzzysforfuzzys"
+s2 = "I am loving fuzzysforfuzzys"
+print ("FuzzyWuzzy Ratio:", fuzz.ratio(s1, s2))
+print ("FuzzyWuzzy PartialRatio: ", fuzz.partial_ratio(s1, s2))
+print ("FuzzyWuzzy TokenSortRatio: ", fuzz.token_sort_ratio(s1, s2))
+print ("FuzzyWuzzy TokenSetRatio: ", fuzz.token_set_ratio(s1, s2))
+print ("FuzzyWuzzy WRatio: ", fuzz.WRatio(s1, s2),'\n\n')
+# for process library,
+query = 'fuzzys for fuzzys'
+choices = ['fuzzy for fuzzy', 'fuzzy fuzzy', 'g. for fuzzys']
+print ("List of ratios: ")
+print (process.extract(query, choices), '\n')
+print ("Best among the above list: ",process.extractOne(query, choices))
+	
+Solve Tipping Problem using fuzzy logic
+!pip install fuzzywuzzy 
+!pip install -U scikit-fuzzy 
+import skfuzzy as fuzz 
+from skfuzzy import control as ctrl 
+import numpy as np 
+quality = ctrl.Antecedent(np.arange(0, 11, 1), 'quality') 
+service = ctrl.Antecedent(np.arange(0, 11, 1), 'service') 
+tip = ctrl.Consequent(np.arange(0, 26, 1), 'tip') 
+quality.automf(3) 
+service.automf(3)
+tip['low'] = fuzz.trimf(tip.universe, [0, 0, 13]) 
+tip['medium'] = fuzz.trimf(tip.universe, [0, 13, 25]) 
+tip['high'] = fuzz.trimf(tip.universe, [13, 25, 25]) 
+quality['average'].view() 
+service.view() 
+tip.view() 
+rule1 = ctrl.Rule(quality['poor'] | service['poor'], tip['low']) 
+rule2 = ctrl.Rule(service['average'], tip['medium']) 
+rule3 = ctrl.Rule(service['good'] | quality['good'], tip['high']) 
+rule1.view() 
+tipping_ctrl = ctrl.ControlSystem([rule1, rule2, rule3]) 
+tipping = ctrl.ControlSystemSimulation(tipping_ctrl) 
+tipping.input['quality'] = 6.5 
+tipping.input['service'] = 9.8 
+tipping.compute() 
+print (tipping.output['tip']) 
+tip.view(sim=tipping) 
