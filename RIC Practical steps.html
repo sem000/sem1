@@ -1,0 +1,293 @@
+﻿RIC Practical
+All datasets (Asif sir link)
+http://bit.ly/ricpract2022
+
+You can ask explanation of code to this AI for any subject.
+https://chat.openai.com/chat
+
+Practical 1
+A) Write a program for obtaining descriptive statistics of data.
+Data set link https://docs.google.com/spreadsheets/d/1qt0bU5RSbV41OHyuCJFpdH3a8jMeQClS/edit
+
+1.In Excel, Go to File Menu→Options→add-Ins
+2.Click on Manage→Select Excel Adds-ins→Go
+3.Add-ins window will open→Tick Analysis ToolPak,Analysis ToolPak-VBA and Solver Add-in if already not ticked→OK
+4. In Ribbon Data tab will appear→Click on Data tab→Click on Data Analysis
+5. Data Analysis window will be open→Select Descriptive Statistics→ Click on OK
+6. Descriptive Statistics window will open→ In Input Range section, click on upload button and select the data range from the excel worksheet.
+7. Click on Output Range→Click on upload button and select the data range from the excel worksheet→tick on Summary Statistics, Confidence Level for Mean, Kth Largest & Kth smallest
+8. Click on OK
+
+
+
+
+
+
+
+
+
+Practical 1A: Write a python program on descriptive statistics analysis.
+import pandas as pd
+#Create a Dictionary of series
+Age=[25,26,25,23,30,29,23,34,40,30,51,46]
+Rating=[4.23,3.24,3.98,2.56,3.20,4.6,3.8,3.78,2.98,4.80,4.10,3.65]
+d=pd.Series(Age,Rating)
+#Create a DataFrame
+df=pd.DataFrame(d)
+print(df)
+print('###### Sum ######')
+print(df.sum())
+print('##### Mean ######')
+print(df.mean())
+print('##### Standard Deviation #######')
+print(df.std())
+print('###### Descriptive Statistics ########')
+print(df.describe())
+
+B) Import data from different data sources (from Excel, csv, mysql, sql, oracle to R/Python/Excel) 
+To Import data from Excel sheet:
+1. In Data tab, Click on Get Data
+2. Select From file→Select From Excel Workbook.
+3. Select the Excel worksheet to import→click on OK
+4. Navigator Window will open→ Select the sheets you want to import→ Click on Load
+5. Data will be imported from the selected file and will be displayed
+
+
+To Import data from csv file.
+1. In Data tab, Click on Get Data
+2. Select From file→Select From Text/CSV
+3. Select the csv file and Click on Import
+4. Preview window will open→click on Load
+5. The File will be Imported and will be shown
+
+
+
+RIC Practical 2
+
+B) Perform analysis of given secondary data
+
+Data set - https://docs.google.com/spreadsheets/d/1YSBdBeTTag5i_xod6CDOI9xCdd603wbp/edit#gid=1878199183
+(Copy the data of the dataset into new excel file if the dataset is not downloading)
+
+https://youtu.be/Wx9q7nVJ9Kg
+
+
+
+
+RIC Practical 3
+
+A) Perform testing of Hypothesis using one sample t-test
+
+One sample t-test : The One Sample t Test determines whether the sample mean is statistically different from a known or hypothesised population mean. The One Sample t Test is a parametric test.
+p value is a number, calculated from a statistical test, that describes how likely you are to have found a particular set of observations if the null hypothesis were true. P values are used in hypothesis testing to help decide whether to reject the null hypothesis.
+Dataset - https://drive.google.com/file/d/1q_h1lB458ireuwNR8lSuv5uL-OmwnnC7/view
+
+Code:
+OnesampleTtest.py
+from scipy.stats import ttest_1samp
+import numpy as np
+ages = np.genfromtxt('ages.csv')
+print(ages)
+ages_mean = np.mean(ages)
+print(ages_mean)
+tset, pval = ttest_1samp(ages, 30)
+print('p-values - ',pval)
+if pval< 0.05: # alpha value is 0.05
+  print(" we are rejecting null hypothesis")
+else:
+  print("we are accepting null hypothesis")
+
+
+B2) Perform testing of hypothesis using two sample t-test
+Two Sample t Test 
+Example: A college Princiapal informed classroom teachers that some of their students showedunusual potential for intellectual gains. One months later the students identified to teachers ashaving potentional for unusual intellectual gains showed significiantly greater gains performanceon a test said to measure IQ than did students who were not so identified. Below are the data forthe students:
+Dataset – 
+https://vsitedu-my.sharepoint.com/:x:/r/personal/asif_rampurawala_vsit_edu_in/_layouts/15/Doc.aspx?sourcedoc=%7BC3AAEDC2-1D5D-48BA-8BD0-950156BD7BE3%7D&file=Pract%2003%20t-Test.xlsx&action=default&mobileredirect=true
+
+Steps:
+1) First calculate mean and standard deviation.
+To Calculate Standard Mean go to cell A22 and type=SUM(A2:A21)/20
+To Calculate Standard Deviation, go to cell A23 and type=STDEV(A2/A21)
+To Calculate Standard Mean go to cell A22 and type=SUM(A2:A21)/20
+To Calculate Standard Deviation, go to cell A23 and type=STDEV(A2/A21)
+2) T-test statistics
+To find T-test Statistics go to Data→In the Ribbon Click on Data Analysis
+Data Analysis window will be open→Select t-test: Paired Two Sample for Means in Analysis Tools section→click on OK
+t-Test: Paired Two Sample for Means window will open 
+→Select Experiment column (A1:A21) in Variable 1 Range
+→Select Comparison Column (B1:B21) in variable 2 Range
+→Tick the Lables checkbox
+→Select Output Range(D5:F14)
+→Click on OK
+3) To Calculate the T-Test square value 
+go to cell E20
+=(A22-B22)/SQRT((A23*A23)/COUNT(A2:A21)+(B23*B23)/COUNT(A2:A21))
+4) Check H0 will be accepted or rejected
+=IF(E20<E12,"H0 is accepted","H0 is rejected and H1 is accepted")
+
+
+
+
+B2) Write a program for t-test comparing two means for independent variables
+Code –
+import numpy as np
+from scipy import stats
+from numpy.random import randn
+N = 20
+a = 5 * randn(100) + 50
+b = 5 * randn(100) + 51
+var_a = a.var(ddof=1)
+var_b = b.var(ddof=1)
+s = np.sqrt((var_a + var_b)/2)
+t = (a.mean() - b.mean())/(s*np.sqrt(2/N))
+df = 2*N - 2
+#p-value after comparison with the t
+p = 1 - stats.t.cdf(t,df=df)
+print("t = " + str(t))
+print("p = " + str(2*p))
+if t> p :
+  print('Mean of two distribution are different and significant')
+else:
+  print('Mean of two distribution are same and not significant'
+
+
+3C) Perform testing of hypothesis using paired t-test.
+The paired sample t-test is also called dependent sample t-test. It’s an univariate test that tests for a significant difference between 2 related variables. An example of this is if you where to collect the blood pressure for an individual before and after some treatment, condition, or time point. The data set contains blood pressure readings before and after an intervention. These are variables “bp_before” and “bp_after”. 
+
+The hypothesis being test is: 
+• H0 - The mean difference between sample 1 and sample 2 is equal to 0. 
+• H0 - The mean difference between sample 1 and sample 2 is not equal to 0.
+
+
+
+
+
+Code:
+Code & Output: 
+from scipy import stats
+import matplotlib.pyplot as plt
+import pandas as pd
+df = pd.read_csv("blood_pressure.csv")
+print(df[['bp_before','bp_after']].describe())
+#First let’s check for any significant outliers in
+#each of the variables.
+df[['bp_before', 'bp_after']].plot(kind='box')
+# This saves the plot as a png file
+plt.savefig('boxplot_outliers.png')
+
+
+# make a histogram to differences between the two scores.
+df['bp_difference'] = df['bp_before'] - df['bp_after']
+df['bp_difference'].plot(kind='hist', title= 'Blood Pressure Difference Histogram')
+#Again, this saves the plot as a png file
+
+
+
+plt.savefig('blood pressure difference histogram.png')
+stats.probplot(df['bp_difference'], plot= plt)
+plt.title('Blood pressure Difference Q-Q Plot')
+plt.savefig('blood pressure difference qq plot.png')
+stats.shapiro(df['bp_difference'])
+stats.ttest_rel(df['bp_before'], df['bp_after'])
+
+
+
+
+
+Reject Null Hypothesis
+A paired sample t-test was used to analyse the blood pressure before and after the intervention to test if the intervention had a significant affect on the blood pressure. 
+The blood pressure before the intervention was higher (156.45 ± 11.39 units) compared to the blood pressure post intervention (151.36 ± 14.18 units); t
+here was a statistically significant decrease in blood pressure (t(119)=3.34, p= 0.0011) of 5.09 units.
+
+
+Practical 4
+A) Perform testing of hypothesis using chi-squared goodness -of-fit test
+https://youtu.be/A7YfrR8MwpU
+
+B)Perform testing of hypothesis using chi-squared test of independence.
+https://youtu.be/sIIPZBpjsbo
+
+In a study to understand the performance of M. Sc. IT Part -1 class, a college selects a random sample of 100 students. Each student was asked his grade obtained in B. Sc. IT. The sample is as given in separate excel file.
+
+Null Hypothesis - H0 : The performance of girls students is same as boys students.
+Alternate Hypothesis - H1 : The performance of boys and girls students are different.
+Open Excel Workbook
+O A B C D Total
+Girls 11 7 5 5 11 39 6.075
+Boys 30 4 3 10 14 61 6.075
+Total 41 11 8 15 25 100 12.150
+Ei 20.5 5.5 4 7.5 12.5 50
+Prepare a contingency table as shown above. To calculate Girls Students with ‘O’ Grade
+Go to Cell N6 and type =COUNTIF($J$2:$K$40,"O")
+To calculate Girls Students with ‘A’ Grade
+Go to Cell O6 and type =COUNTIF($J$2:$K$40,"A")
+To calculate Girls Students with ‘B’ Grade
+Go to Cell P6 and type =COUNTIF($J$2:$K$40,"B")
+To calculate Girls Students with ‘C’ Grade
+Go to Cell Q6 and type =COUNTIF($J$2:$K$40,"C")
+To calculate Girls Students with ‘D’ Grade
+Go to Cell R6 and type =COUNTIF($J$2:$K$40,"D")
+To calculate Boys Students with ‘O’ Grade
+Go to Cell N7 and type =COUNTIF($D$2:$E$62,"O")
+To calculate Boys Students with ‘A’ Grade
+Go to Cell O7 and type =COUNTIF($D$2:$E$62,"A")
+To calculate Boys Students with ‘B’ Grade
+Go to Cell P7 and type =COUNTIF($D$2:$E$62,"B") To calculate Boys Students with ‘C’ Grade
+Go to Cell Q7 and type =COUNTIF($D$2:$E$62,"C")
+To calculate Boys Students with ‘D’ Grade
+Go to Cell R7 and type =COUNTIF($D$2:$E$62,"D")
+To calculated the expected value Ei
+Go to Cell N9 and type =N8/2 Go to Cell O9 and type =O8/2 Go to Cell P9 and type =P8/2 Go to Cell Q9 and type =Q8/2 Go to Cell R9 and type =R8/2
+Go to Cell S6 and calculate total girl students = SUM(N6:R6) Go to Cell S7 and calculate total girl students = SUM(N7:R7)
+Now Calculate
+Go to cell T6 and type
+=SUM((N6-$N$9)^2/$N$9,(O6-$O$9)^2/$O$9,(P6-$P$9)^2/$P$9,(Q6-Q$9)^2/$Q$9, (R6-$R$9)^2/$R$9)
+Go to cell T7 and type
+=SUM((N7-$N$9)^2/$N$9,(O7-$O$9)^2/$O$9,(P7-$P$9)^2/$P$9,(Q7-Q$9)^2/$Q$9, (R7-$R$9)^2/$R$9)
+To get the table value go to cell T11 and type =CHIINV(0.05,4)
+Go to cell O13 and type =IF(T8>=T11," H0 is Accepted", "H0 is Rejected")
+
+Practical 6
+A) Perform testing of Hypothesis using one-way Annova
+
+ANOVA (Analysis of Variance) is a statistical test used to analyses the difference between the means of more than two groups.
+Univariate ANOVA, also known as one-way ANOVA, is a statistical test used to determine whether there is a significant difference in the mean of a dependent variable among the levels of a single independent variable.
+Dataset - https://drive.google.com/file/d/1OC6k6I843GYiYjLWlwn78r9a41ANhJCm/view
+https://youtu.be/Xy9DC6RO2R4
+
+1) Open data set
+2) Click on data analysis, then select Annova : single factor
+3) For input select all Average data columns
+4) For output range select any blank space below.
+5) Compare the p value with 0.05
+6) Conclusion - Since the resulting p value is less than 0.05. The null hypothesis (H0) is rejected and conclude that there is a significant difference between the SAT scores for each subject.
+
+
+
+
+B) Perform testing of hypothesis using two-way ANOVA.
+A two-way ANOVA is used to estimate how the mean of a quantitative variable changes according to the levels of two categorical variables. Use a two-way ANOVA when you want to know how two independent variables, in combination, affect a dependent variable.
+
+Data set – 
+https://drive.google.com/file/d/1QQpKtz-dYInyr87U5ctlr8cyem-kZhFO/view
+
+1) open excel sheet
+2) data analysis then, select “Annova – Two factor with replication”
+3) Select the input, Input Range - $A$1:$C$61
+Rows Per Sample – 30 (Because 30 Patients are given each dose) Alpha – 0.05 Output Range - $F$1:$M$24
+4) P-value = 0.0588079 column in the ANOVA Source of Variation table at the bottom of the output. Because the p-values for both medicin dose and interaction are less than our significance level, these factors are statistically significant. On the other hand, the interaction effect is not significant because its p-value (0.0588) is greater than our significance level. Because the interaction effect is not significant, we can focus on only the main effects and not consider the interaction effect of the dose.
+C) Multivariate (MANOVA)
+MANOVA is used when there are multiple dependent variables, and it tests the null hypothesis that the means of the dependent variables are equal across groups, against the alternative hypothesis that at least one of the means is different. It is a powerful tool that allows researchers to investigate the relationship between multiple dependent variables and one or more independent variables.
+
+Practical 7
+Sampling is the process of selecting a subset of individuals from a larger population to estimate certain characteristics of that population.
+
+Random sampling is done by generating a random sample of individuals from the population, usually by using random number generators or a table of random numbers. This method is relatively simple and inexpensive, and it is widely used in social and natural sciences research.One of the main advantages of random sampling is that it reduces the chances of bias, as every individual in the population has an equal chance of being selected.
+
+Stratified sampling is a statistical method of sampling in which the population is divided into smaller groups, called strata, based on certain characteristics. The goal of stratified sampling is to ensure that the sample represents different subgroups of the population in proportion to their representation in the population. This can be beneficial when different subgroups within the population have different characteristics or when the population has a non-random distribution of certain characteristics.
+
+
+
+
+
+
