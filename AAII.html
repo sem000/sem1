@@ -1,0 +1,764 @@
+prac 1 Expery System
+
+#######desease#######
+Info = []
+Name = input("Enter Your Name: ")
+Info.append(Name)
+Age = int(input("Enter Your Age: "))
+Info.append(Age)
+A = ["Fever", "Headache", "Tiredness", "Vomitting"]
+B = ["Urinate A Lot", "Feels Thirsty", "Weight Loss", "Blurry Vision", "Feels Very Hungry", "Feels Very Tired"]
+print(A,B)
+Symp = input("Enter Symptoms As Above Separated By Comma ")
+Lst = Symp.split(",")
+print(Info)
+print("Symptoms:")
+for i in Lst:
+    print(i)
+ 
+if i.strip() in A:
+    print("You May Have Malaria")
+    print("Visit A Doctor")
+elif i.strip() in B:
+    print("You May Have Diabetes")
+    print("Consume Less Sugar")
+else:
+    print("Symptoms Does Not Match")
+
+
+#########CORONA############
+name =input("Enter your name: ") 
+fever =input("DO YOU HAVE fever (Y/N)").lower()  
+cough =input("DO YOU HAVE cough (Y/N)").lower()  
+sob =input("DO YOU HAVE shortness of breath (Y/N)").lower() 
+st =input("DO YOU HAVE sore throat (Y/N)").lower()  
+mp =input("DO YOU HAVE mucle pain (Y/N)").lower()  
+hc =input("DO YOU HAVE headach(Y/N)").lower() 
+ 
+#CORONA 
+diarrhoea=input("DO YOU HAVE diarrhoea (Y/N)").lower() 
+conjunctivitis=input("DO YOU HAVE conjunctivitis (Y/N)").lower() 
+lot=input("DO YOU HAVE Loss OF taste (Y/N)").lower() 
+cp=input("DO YOU HAVE chest pain or pressure (Y/N)").lower() 
+lsp =input("DO YOU HAVE Loss Of Speech or movement (Y/N)").lower() 
+if fever=="y" and cough=="y" and sob=="y" and st=="y" and mp=="y" and hc=="y": 
+    print(name+" "+" YOU HAVE FLU") 
+    med=input("Sir/Ma'am would you like to took at some medicine for flu(Y/N)").lower() 
+    if med=="y": 
+        print("disclainer contact doctor for better guidance") 
+        print("There are four FDA-approved antiviral drugs recommended by CDC to treat flu this season") 
+        print("1.Oseltasivir phosphate") 
+        print("2.zonasivir ") 
+        print("3.perasivir ") 
+        print("4.balaxavir morboxil ") 
+elif diarrhoea=="y" and st=="y" and fever =="y" and cough=="y" and conjunctivitis=="y" and lot=="y": 
+    print(name+" "+" YOU HAVE Corona") 
+    med=input("Sir/Ma'am would you like to took at some remedi for Corona(Y/N)").lower() 
+    if med=="y": 
+        print("TAKE VACCINE AND QUARANTINE")        
+elif fever=="y" and cough=="y": 
+    print(name+" "+" YOU HAVE Common Cold") 
+    med= input("Sir/Ma'am would you like to took at some remedi for common cold(Y/N)").lower() 
+    if med=="y": 
+        print("--------------------------------------------------------------------") 
+        print("disclainer contact doctor for better guidance") 
+        print("--------------------------------------------------------------------") 
+        print("Treatment consists of anti-inflammatories and decongestants\n Most prople recover on their own") 
+        print("1.Nonsteroidal anti-inflammatory drug, Analgesic, Antibistamine, Cough medicine and Deconges") 
+else: 
+    print("Enable to identify")
+
+
+
+prac 2 Bot using AIML
+
+pip install  aiml
+pip install python-aiml
+
+
+########simple.py#####
+
+import aiml
+
+kernel = aiml.Kernel()
+kernel.learn("std-startup.xml")
+kernel.respond("load aiml b")
+
+while True:
+    input_text = input(">Human: ")
+    response = kernel.respond(input_text)
+    print(">Bot: "+response)
+
+#####basic_chat.aiml#####
+
+<aiml>
+<!-- basic_chat.aiml -->
+
+    <category>
+        <pattern>HELLO</pattern>
+        <template>
+            Well, hello Mandar!
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT ARE YOU</pattern>
+        <template>
+            I'm a bot, and I'm silly!
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT DO YOU DO</pattern>
+        <template>
+            I'm here to annoy you!
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHO AM I</pattern>
+        <template>
+            You run a crappy YouTube Channel, get a life...
+        </template>
+    </category>
+
+
+</aiml>
+
+
+####std-startup.xml######
+
+<aiml>
+    
+    <category>
+
+       
+        <pattern>LOAD AIML B</pattern>
+
+        
+        <template>
+            <learn>basic_chat.aiml</learn>
+           
+        </template>
+        
+    </category>
+
+</aiml>
+
+
+((AAI Pract 3 :-)) BAYES THEOREM
+
+######Suppose we are given the probability of Chaitu has a cold as 0.25######
+
+
+def bayes_theorem(p_h,p_e_given_h,p_e_given_not_h):  
+    #P(not h)  
+    not_h=1-p_h  
+
+    #P(E)  
+    p_e=p_e_given_h*p_h+p_e_given_not_h*not_h  
+
+    #P(H|E)  
+    p_h_given_e=(p_e_given_h*p_h)/p_e  
+
+    return p_h_given_e
+
+# P(H) Mandar has a cold  
+p_h = float(input("Enter probability of Mandar having cold"))  
+
+# P(E|H) Mandar observed sneezing when he had cold  
+p_e_given_h = float(input("Enter probability of Mandar observed sneezing when he had cold"))  
+
+# P(E|not ~H) Mandar observed sneezing when he did not have cold  
+p_e_given_not_h = float(input("Enter probability of Mandar observed sneezing when he did not have cold"))  
+ 
+# calculate P(H|E) Mandar has old given Mandar was observed sneezing  
+result = bayes_theorem(p_h, p_e_given_h, p_e_given_not_h)  
+
+print("Mandar's probability of having cold given that he sneezes is P(H|E) = " ,round(result,2))
+
+output
+
+Enter probability of Mandar having cold0.25
+Enter probability of Mandar observed sneezing when he had cold0.9
+Enter probability of Mandar observed sneezing when he did not have cold0.2
+Mandar's probability of having cold given that he sneezes is P(H|E) =  0.6
+
+
+#####particular drug is 97% sensitive and 95% specific########
+
+def drug_user(prob_th=0.5,sensitivity=0.97,specificity=0.95,prevelance=0.005,verbose=True): 
+ 
+    p_user = prevelance  
+    p_non_user = 1-prevelance  
+    p_pos_user = sensitivity  
+    p_neg_user = specificity  
+    p_pos_non_user = 1-specificity  
+
+    num = p_pos_user*p_user  
+
+    den = p_pos_user*p_user+p_pos_non_user*p_non_user  
+
+    prob = num/den  
+
+    print("Probability of the Mandar being a drug user is", round(prob,3)) 
+
+    if verbose:  
+
+        if prob > prob_th:  
+
+            print("The Mandar could be an user")  
+
+        else:  
+
+            print("The Mandar may not be an user")  
+
+    return prob  
+drug_user() 
+
+output
+
+Probability of the Mandar being a drug user is 0.089
+The Mandar may not be an user
+0.08882783882783876
+
+
+((AAI Pract 4 :-)) COND & JOINT PROB
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+sns.set()
+data=pd.read_csv('/content/data (1).csv', header=None, names=['x','y'])
+sns.jointplot(data['x'],data['y'],kind='kde').plot_joint(sns.scatterplot)
+plt.show()
+
+
+import pandas as pd
+df = pd.read_csv('/content/student-mat.csv')
+df.head(3)
+len(df)
+import numpy as np
+df['grade_A'] = np.where(df['G3']*5 >= 80, 1, 0)
+df['high_absenses'] = np.where(df['absences'] >= 10, 1, 0)
+df['count'] = 1
+df = df[['grade_A','high_absenses','count']]
+df.head()
+pd.pivot_table(
+  df,
+  values='count', 
+  index=['grade_A'], 
+  columns=['high_absenses'], 
+  aggfunc=np.size, 
+  fill_value=0 
+)
+
+
+df =df[['grade_A','high_absenses','count']]
+df.head()
+
+ 
+calculate the probability of customer spending score is greater than 50 when he/she has age less than 60
+
+
+
+
+
+((AAI Pract 5 :-))  RULE BASED SYSTEM
+#######FAMILY TREE#########
+
+
+male(ramchandra). % GF
+male(sanjay). %Father
+male(santosh). %Uncle
+male(salil). %Brother Cousin
+male(mandar). %Myself 
+male(sushant). %Brother Cousin
+
+female(sunanda). %GM
+female(anjali). %Aunt 
+female(meena). %Mother 
+female(usha). %Aunt 
+female(pankaja). %Sis Cousin
+female(mitali). %Sis
+female(siddhi). %SisCousin
+female(shauriya). %Niece
+
+parent(ramchandra,anjali).
+parent(ramchandra,sanjay). 
+parent(ramchandra,usha).
+parent(ramchandra,santosh).
+
+parent(sunanda,anjali).
+parent(sunanda,sanjay). 
+parent(sunanda,usha). 
+parent(sunanda,santosh).
+
+parent(anjali,pankaja). 
+parent(anjali,salil).
+
+parent(sanjay,mitali).
+parent(sanjay,mandar).
+parent(meena,mitali).
+parent(meena,mandar).
+
+parent(usha,siddhi).
+
+parent(santosh,sushant). 
+
+parent(pankaja,shauriya).
+
+mother(X,Y):-parent(X,Y),female(X).
+father(X,Y):- parent(X,Y), male(X).
+
+grandmother(GM,X):- mother(GM,Y) ,parent(Y,X).
+grandfather(GF,X):- father(GF,Y) ,parent(Y,X).
+
+sibling(X,Y):- mother(M,X), mother(M,Y), X\=Y, father(F,X), father(F,Y).
+brother(X,Y):- sibling(X,Y), male(X).
+sister(X,Y):- sibling(X,Y), female(X).
+
+uncle(U,X):- parent(Y,X),brother(U,Y).
+aunt(A,X):- parent(Y,X), sister(A,Y).
+nephew(N,X):- sibling(S,X),parent(S,N), male(N).
+niece(N,X):- sibling(S,X),parent(S,N), female(N).
+cousin(X,Y):-parent(P,Y),sibling(S,P),parent(S,X).
+
+
+
+
+((AAI Pract 6 :-))  FUZZY BASED OPERATIONS
+########Fuzzy set######### 
+#Union of two fuzzy sets.
+A = dict()
+B = dict()
+Y = dict()
+
+A = {"a": 0.2, "b": 0.3, "c": 0.6, "d": 0.6}
+B = {"a": 0.9, "b": 0.9, "c": 0.4, "d": 0.5}
+
+print('The First Fuzzy Set is :', A)
+print('The Second Fuzzy Set is :', B)
+
+#Fuzzy Set Union.
+result={}
+for i in A:
+    if(A[i]>B[i]):
+        result[i]=A[i]
+    else:
+        result[i]=B[i]
+print("Union of two sets is",result)
+    
+#Fuzzy Set Intersection
+result={}
+for i in A:
+    if(A[i]<B[i]):
+        result[i]=A[i]
+    else:
+        result[i]=B[i]
+print("Intersection of two sets is",result)
+    
+#Fuzzt Set Complement
+result={}
+for i in A:
+    result[i]=round(1-A[i],2)
+print("Complement of First set is",result)
+
+#Fuzzy Set Difference
+result={}
+for i in A:
+    result[i]=round(min(A[i],1-B[i]),2)
+print("Difference of two sets is",result)
+
+
+#######fuzzywuzzy########
+#####!pip install fuzzywuzzy#####
+
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+
+s1 = "I love GeeksforGeeks"
+s2 = "I am loving GeeksforGeeks"
+print ("FuzzyWuzzy Ratio: ", fuzz.ratio(s1, s2))
+print ("FuzzyWuzzy PartialRatio: ", fuzz.partial_ratio(s1, s2))
+print ("FuzzyWuzzy TokenSortRatio: ", fuzz.token_sort_ratio(s1, s2))
+print ("FuzzyWuzzy TokenSetRatio: ", fuzz.token_set_ratio(s1, s2))
+print ("FuzzyWuzzy WRatio: ", fuzz.WRatio(s1, s2),'\n\n')
+  
+# for process library,
+query = 'geeks for geeks'
+choices = ['geek for geek', 'geek geek', 'g. for geeks'] 
+print ("List of ratios: ")
+print (process.extract(query, choices), '\n')
+print ("Best among the above list: ",process.extractOne(query, choices))
+
+
+
+
+((AAI Pract 7 :-))  SUPERVISED LEARNING METHODS USING PYTHON
+
+Step 1: First we need to import pandas and numpy. Pandas are basically use for table manipulations. Using Pandas package, we are going to upload Titanic training dataset and then by using head () function we will look at first five rows.
+import pandas as pd
+import numpy as np
+titanic= pd.read_csv("/content/sample_data/train.csv")
+titanic.head()
+
+Step 2: Create Two Data Frames, one containing categories and one containing numbers
+titanic_cat = titanic.select_dtypes(object)
+titanic_num = titanic.select_dtypes(np.number)
+
+Step 3: Now we need to drop two columns (name column and ticket column)
+titanic_cat.head()
+titanic_num.head()
+titanic_cat.drop(['Name','Ticket'], axis=1, inplace=True)
+titanic_cat.head()
+
+Step 4: Now to find the null values present in the above column
+titanic_cat.isnull().sum()
+
+Step 5: Replace all the null values present with the maximum count category
+titanic_cat.Cabin.fillna(titanic_cat.Cabin.value_counts().idxmax(), inplace=True)
+titanic_cat.Embarked.fillna(titanic_cat.Embarked.value_counts().idxmax(), inplace=True)
+
+Step 6: After successfully removing all the null values our new data set is ready.
+titanic_cat.head(20)
+
+Step 7: The next step will be to replace all the categories with Numerical Labels. For that we will be using LabelEncoders Method.
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+titanic_cat = titanic_cat.apply(le.fit_transform)
+
+Step 8: Now we have only one column left which contain null value in it (Age). Let’s replace it with mean 
+titanic_cat.head()
+titanic_num.isna().sum()
+titanic_num.Age.fillna(titanic_num.Age.mean(), inplace=True)
+titanic_num.isna().sum()
+
+Step 9: Now we need to remove the unnecessary columns, since the passengerid is an unnecessary column, we need to drop it
+titanic_num.drop(['PassengerId'], axis=1, inplace=True)
+titanic_num.head()
+
+Step 10: Now we will combine two data frames and make it as one
+titanic_final = pd.concat([titanic_cat,titanic_num],axis=1)
+titanic_final.head()
+
+Step 11: Now we will define dependent and independent variables
+X=titanic_final.drop(['Survived'],axis=1)
+Y= titanic_final['Survived']
+
+Step 12: Now we will be taking 80% of the data as our training set, and remaining 20% as our test set.
+X_train = np.array(X[0:int(0.80*len(X))])
+Y_train = np.array(Y[0:int(0.80*len(Y))])
+X_test = np.array(X[int(0.80*len(X)):])
+Y_test = np.array(Y[int(0.80*len(Y)):])
+len(X_train), len(Y_train), len(X_test), len(Y_test)
+
+Step 13: Now we will import all the algorithms
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import LinearSVC
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+
+Step 14: Now we will initialize them in respective variables
+LR = LogisticRegression()
+KNN = KNeighborsClassifier()
+NB = GaussianNB()
+LSVM = LinearSVC()
+NLSVM = SVC(kernel='rbf')
+DT = DecisionTreeClassifier()
+RF = RandomForestClassifier()
+
+Step 15: Now we will train our model
+LR_fit = LR.fit(X_train, Y_train)
+KNN_fit = KNN.fit(X_train, Y_train)
+NB_fit = NB.fit(X_train, Y_train)
+LSVM_fit = LSVM.fit(X_train, Y_train)
+NLSVM_fit = NLSVM.fit(X_train, Y_train)
+DT_fit = DT.fit(X_train, Y_train)
+RF_fit = RF.fit(X_train, Y_train)
+
+Step 16: Now we need to predict the test data set and compare the accuracy score
+LR_pred = LR_fit.predict(X_test)
+KNN_pred = KNN_fit.predict(X_test)
+NB_pred = NB_fit.predict(X_test)
+LSVM_pred = LSVM_fit.predict(X_test)
+NLSVM_pred = NLSVM_fit.predict(X_test)
+DT_pred = DT_fit.predict(X_test)
+RF_pred = RF_fit.predict(X_test)
+
+from sklearn.metrics import accuracy_score
+print("Logistic Regression is %f percent accurate" % (accuracy_score(LR_pred, Y_test)*100))
+print("KNN is %f percent accurate" % (accuracy_score(KNN_pred, Y_test)*100))
+print("Naive Bayes is %f percent accurate" % (accuracy_score(NB_pred, Y_test)*100))
+print("Linear SVMs is %f percent accurate" % (accuracy_score(LSVM_pred, Y_test)*100))
+print("Non Linear SVMs is %f percent accurate" % (accuracy_score(NLSVM_pred, Y_test)*100))
+print("Decision Trees is %f percent accurate" % (accuracy_score(DT_pred, Y_test)*100))
+print("Random Forests is %f percent accurate" % (accuracy_score(RF_pred, Y_test)*100))
+
+
+((AAI Pract 8 :-)) CLUSTERING ALGORITHM
+
+#####111#######
+
+import matplotlib.pyplot  as plt
+import pandas as pd
+import numpy as np
+
+customer_data = pd.read_csv('/content/Mall_Customers.csv')
+
+customer_data.shape
+customer_data.head()
+data = customer_data.iloc[:, 3:5].values
+
+import scipy.cluster.hierarchy as shc
+plt.figure(figsize=(10,7))
+plt.title("Customer Dendograms")
+dend = shc.dendrogram(shc.linkage(data, method='ward'))
+
+from sklearn.cluster import AgglomerativeClustering
+cluster = AgglomerativeClustering(n_clusters=5, affinity='euclidean', linkage='ward')
+cluster.fit_predict(data)
+
+plt.figure(figsize=(10,7))
+plt.scatter(data[:,0], data[:,1], c=cluster.labels_, cmap='rainbow')
+plt.show()
+
+
+#######222#######
+#Synthetic classification dataset
+
+from numpy import where
+from sklearn.datasets import make_classification
+from matplotlib import pyplot
+
+
+X, y = make_classification(n_samples=1000, n_features=2, n_informative=2, n_redundant=0, n_clusters_per_class=1, random_state=4)
+
+
+from numpy import where
+from sklearn.datasets import make_classification
+from matplotlib import pyplot
+
+X,y = make_classification(n_samples=1000, n_features=2, n_informative=2, n_redundant=0, n_clusters_per_class=1, random_state=4)
+
+for class_value in range(2):
+
+  row_ix = where(y == class_value)
+
+  pyplot.scatter(X[row_ix, 0], X[row_ix, 1])
+
+pyplot.show()
+
+
+
+((AAI Pract 9 :-))  BFS ALGO
+
+graph = {
+    '5' : ['3','7'],
+    '3' : ['2','4'],
+    '7' : ['8'],
+    '2' : [],
+    '4' : ['8'],
+    '8' : []
+    }
+
+#list for visited nodes
+visited=[]
+
+#initialize a queue
+queue=[]
+
+#create a function for BFS
+def bfs(visited, graph, node):
+    visited.append(node)
+    queue.append(node)
+
+
+#create a loop to visit each node
+    while queue:
+        m=queue.pop(0)
+        print(m,end="")
+        for neighbour in graph[m]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
+            
+
+#driver code
+print("Following is the Breath-First Search")
+
+#call function for BFS
+bfs(visited,graph,'5')
+
+
+
+((AAI Pract 10 :-))  DFS ALGO
+
+
+graph = {
+    '5' : ['3','7'],
+    '3' : ['2','4'],
+    '7' : ['8'],
+    '2' : [],
+    '4' : ['8'],
+    '8' : []
+    }
+
+#keep track of visited nodes
+visited=set()
+
+#create a function for BFS
+def dfs(visited, graph, node):
+    if node not in visited:
+        print(node)
+        visited.add(node)
+        for neighbour in graph[node]:
+            dfs(visited, graph, neighbour)        
+
+#driver code
+print("Following is the Depth-First Search")
+
+#call function for BFS
+dfs(visited,graph,'5')
+
+####probability of customer spending score##########
+
+import pandas as pd
+df=pd.read_csv("D:\\Set\\Important\\Downloads\\Mall_Customers.csv")
+
+
+import numpy as np
+
+
+df['Age']=np.where(df['Age']<=60,1,0)
+df['SpendingScore']=np.where(df['SpendingScore']>50,1,0)
+print(df)
+
+df['count']=1
+
+
+df=df[['Age','SpendingScore','count']]
+df.head()
+
+
+df=pd.pivot_table(df,
+             values='count',
+             index=['Age'],
+             columns=['SpendingScore'],
+             aggfunc=np.size,
+             fill_value=0)
+
+
+print(df)
+
+#########Semantic hierarichal######
+
+employee(worker1).
+employee(worker2). 
+employee(worker3). 
+employee(manager_it). 
+employee(manger_hr). 
+employee(ceo). 
+employee(directors). 
+employee (owners).
+
+boss(manager_it,worker1). 
+boss(manager_it,worker2). 
+boss(manger_hr,worker3). 
+boss(ceo,manager_it). 
+boss(ceo,manager_hr). 
+boss(directors,ceo). 
+boss(owners,directors). 
+ 
+superior(X,Y):-boss(X,Y),employee(X). 
+higher_superior(GM,X):-superior(GM,Y),boss(Y,X). 
+sibling(X,Y):-superior(M,X),superior(M,Y),X\=Y,higher_superior(F,X),higher_superior(F,Y).
+
+
+#######k-mean######
+
+# -- coding: utf-8 --
+"""Untitled1.ipynb
+
+Automatically generated by Colaboratory.
+
+Original file is located at
+   https://colab.research.google.com/drive/1_gRXeLreacZ17YRxP7YlxIgGefcGYOQ9
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import sklearn
+
+#Import the dataset and slice the important features
+dataset = pd.read_csv('/content/Mall_Customers.csv')
+X = dataset.iloc[:, [3,4]].values
+
+#Find the optimal k value for clustering the data.
+from sklearn.cluster import KMeans
+wcss = []
+for i in range(1,11):
+   kmeans = KMeans(n_clusters=i, init='k-means++',random_state=42)
+   kmeans.fit(X)
+   wcss.append(kmeans.inertia_)    
+plt.plot(range(1,11),wcss)
+plt.xlabel('Number of clusters')
+plt.ylabel('WCSS')
+plt.show()
+
+#The point at which the elbow shape is created is 5.
+kmeans = KMeans(n_clusters=5,init="k-means++",random_state=42)
+y_kmeans = kmeans.fit_predict(X)
+plt.scatter(X[y_kmeans == 0,0], X[y_kmeans == 0,1], s = 60, c = 'red', label = 'Cluster1')
+plt.scatter(X[y_kmeans == 1,0], X[y_kmeans == 1,1], s = 60, c = 'blue', label = 'Cluster2')
+plt.scatter(X[y_kmeans == 2,0], X[y_kmeans == 2,1], s = 60, c = 'green', label = 'Cluster3')
+plt.scatter(X[y_kmeans == 3,0], X[y_kmeans == 3,1], s = 60, c = 'violet', label = 'Cluster4')
+plt.scatter(X[y_kmeans == 4,0], X[y_kmeans == 4,1], s = 60, c = 'yellow', label = 'Cluster5')
+plt.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1],s=100,c='black',label='Centroids')
+plt.xlabel('Annual Income (k$)')
+plt.ylabel('Spending Score (1-100')
+plt.legend()
+plt.show()
+
+
+#####drug###########
+
+def drug_user(prob_th=0.5,sensitivity=0.97,specificity=0.95,prevelance=0.005,verbose=True):
+#FORMULA  
+    p_user = prevelance  
+    p_non_user = 1-prevelance  
+    p_pos_user = sensitivity  
+    p_neg_user = specificity  
+    p_pos_non_user = 1-specificity  
+    num = p_pos_user*p_user  
+    den = p_pos_user*p_user+p_pos_non_user*p_non_user  
+    prob = num/den  
+    print("Probability of the Mandar being a drug user is", round(prob,3)) 
+    if verbose:  
+        if prob > prob_th:  
+            print("The Mandar could be an user")  
+    else:  
+            print("The Mandar may not be an user")  
+    return prob  
+drug_user()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
